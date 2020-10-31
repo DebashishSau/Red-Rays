@@ -239,46 +239,49 @@ class _SearchState extends State<Search> {
                                 .once(),
                             builder: (context, snapshot1) {
                               return snapshot1.hasData
-                                  ? Card(
-                                      shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(20)),
-                                      elevation: 15,
+                                  ? Padding(
+                                      padding: const EdgeInsets.all(8.0),
                                       child: Container(
-                                        width:
-                                            MediaQuery.of(context).size.width /
-                                                1.3,
-                                        height:
-                                            MediaQuery.of(context).size.height /
-                                                8,
                                         decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(20)),
-                                        child: Row(
-                                          children: [
-                                            Padding(
-                                              padding:
-                                                  const EdgeInsets.all(8.0),
-                                              child: CircleAvatar(
-                                                radius: 30,
-                                                backgroundColor:
-                                                    Colors.transparent,
-                                                backgroundImage: NetworkImage(
-                                                    snapshot1
-                                                        .data.value['image']),
-                                              ),
+                                            color: Colors.blue[900],
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(15))),
+                                        child: Container(
+                                          decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(20)),
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(10.0),
+                                            child: Column(
+                                              children: [
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.all(8.0),
+                                                  child: CircleAvatar(
+                                                    radius: 30,
+                                                    backgroundColor:
+                                                        Colors.transparent,
+                                                    backgroundImage:
+                                                        NetworkImage(snapshot1
+                                                            .data
+                                                            .value['image']),
+                                                  ),
+                                                ),
+                                                SizedBox(
+                                                  width: 30,
+                                                ),
+                                                Text(
+                                                  snapshot1
+                                                      .data.value['fullname'],
+                                                  style: TextStyle(
+                                                      fontSize: 25,
+                                                      color: Colors.white,
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                )
+                                              ],
                                             ),
-                                            SizedBox(
-                                              width: 30,
-                                            ),
-                                            Text(
-                                              snapshot1.data.value['fullname'],
-                                              style: TextStyle(
-                                                  fontSize: 25,
-                                                  color: Colors.black,
-                                                  fontWeight: FontWeight.bold),
-                                            )
-                                          ],
+                                          ),
                                         ),
                                       ),
                                     )
