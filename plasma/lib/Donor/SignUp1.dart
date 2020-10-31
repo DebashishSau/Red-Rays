@@ -219,20 +219,20 @@ class _SignUpState extends State<SignUp2> {
         child: Column(
           children: [
             Container(
-              color: Color(0xFFFFC0CB),
+              color: Color(0xFF9F000F),
               child: Container(
                 height: 300,
-                /*child: Center(
+                child: Center(
                   child: Container(
                     height: 180,
                     width: 240,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.all(Radius.circular(10)),
                         image: DecorationImage(
-                            image: AssetImage("assets/Logo.png"),
+                            image: AssetImage("images/logo.png"),
                             fit: BoxFit.cover)),
                   ),
-                ),*/
+                ),
               ),
             ),
             Expanded(
@@ -252,26 +252,31 @@ class _SignUpState extends State<SignUp2> {
                               SizedBox(
                                 height: 10,
                               ),
-                              Text(
-                                "Add your profile image",
-                                style: TextStyle(
-                                  fontSize: 17,
-                                ),
-                              ),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              GestureDetector(
-                                onTap: () async {
-                                  uploadToStorage();
-                                },
-                                child: CircleAvatar(
-                                  backgroundColor: Color(0xFFFFC0CB),
-                                  radius: 30.6,
-                                  backgroundImage: check == false
-                                      ? ExactAssetImage("images/5.png")
-                                      : NetworkImage(downloadurl),
-                                ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    "Upload Profile Picture",
+                                    style: TextStyle(
+                                      fontSize: 20,
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: 20,
+                                  ),
+                                  GestureDetector(
+                                    onTap: () async {
+                                      uploadToStorage();
+                                    },
+                                    child: CircleAvatar(
+                                      backgroundColor: Colors.red[100],
+                                      radius: 30.6,
+                                      backgroundImage: check == false
+                                          ? ExactAssetImage("images/5.png")
+                                          : NetworkImage(downloadurl),
+                                    ),
+                                  ),
+                                ],
                               ),
                               Padding(
                                 padding:
@@ -498,10 +503,10 @@ class _SignUpState extends State<SignUp2> {
                                         size: 30,
                                       ),
                                       SizedBox(
-                                        width: 20,
+                                        width: 10,
                                       ),
                                       Text(
-                                        "Blood Report",
+                                        "ATTACH BLOOD REPORT",
                                         style: TextStyle(fontSize: 19),
                                       )
                                     ],
@@ -542,7 +547,7 @@ class _SignUpState extends State<SignUp2> {
                                         size: 30,
                                       ),
                                       SizedBox(
-                                        width: 20,
+                                        width: 10,
                                       ),
                                       Text(
                                         "COVID-19 negative certificate",
@@ -582,9 +587,9 @@ class _SignUpState extends State<SignUp2> {
                         },
                         child: Container(
                           height: 40,
-                          width: 300,
+                          width: 350,
                           decoration: BoxDecoration(
-                              color: Color(0xFFFF69B4),
+                              color: Colors.blue[900],
                               borderRadius:
                                   BorderRadius.all(Radius.circular(10))),
                           child: Center(
@@ -649,7 +654,7 @@ class _SignUpState extends State<SignUp2> {
                               child: Text(
                                 " Sign In.",
                                 style: TextStyle(
-                                    color: Color(0xFFFF69B4),
+                                    color: Color(0xFF9F000F),
                                     fontWeight: FontWeight.w900,
                                     fontSize: 17),
                               ),
