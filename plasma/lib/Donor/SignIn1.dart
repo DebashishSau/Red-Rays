@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:plasma/GoogleAuth/google.dart';
-import 'package:plasma/bottombar/bottom.dart';
+import 'package:plasma/Donor/bottombar/bottom1.dart';
+import 'package:plasma/Donor/googleauth/google1.dart';
 
 class SignIn1 extends StatefulWidget {
   final Function toggle;
@@ -221,7 +221,7 @@ class _SignInState extends State<SignIn1> {
                                       Navigator.pushReplacement(
                                           context,
                                           MaterialPageRoute(
-                                              builder: (context) => Bottom()));
+                                              builder: (context) => Bottom1()));
                                     } else {
                                       print("not");
                                     }
@@ -312,7 +312,7 @@ class _SignInState extends State<SignIn1> {
                                   Navigator.of(context).push(
                                     MaterialPageRoute(
                                       builder: (context) {
-                                        return Bottom();
+                                        return Bottom1();
                                       },
                                     ),
                                   );

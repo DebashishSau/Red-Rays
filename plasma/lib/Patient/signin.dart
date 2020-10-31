@@ -1,7 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:plasma/GoogleAuth/google.dart';
+import 'package:plasma/Patient/GoogleAuth/google.dart';
 import 'package:plasma/bottombar/bottom.dart';
+import 'package:plasma/global.dart';
 
 class SignIn extends StatefulWidget {
   final Function toggle;
@@ -31,7 +32,7 @@ class _SignInState extends State<SignIn> {
 
       final FirebaseUser currentUser = await auth.currentUser();
       assert(user.user.uid == currentUser.uid);
-      // uid1 = user.user.uid;
+      uid1 = user.user.uid;
 
       return user;
     } catch (e) {

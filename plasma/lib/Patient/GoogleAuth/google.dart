@@ -56,7 +56,7 @@ void signOutGoogle() async {
 Future<void> add(
     String username, String useremail, String image, String uid) async {
   // var uuid = new Uuid().v1();
-  DatabaseReference _color2 = databaseReference.child("Users").child(uid);
+  DatabaseReference _color2 = databaseReference.child("Patients").child(uid);
   final TransactionResult transactionResult =
       await _color2.runTransaction((MutableData mutableData) async {
     mutableData.value = (mutableData.value ?? 0) + 1;

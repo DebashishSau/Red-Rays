@@ -7,6 +7,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:plasma/Donor/selfdeclarationform/form.dart';
 import 'package:plasma/bottombar/bottom.dart';
 import 'package:uuid/uuid.dart';
 
@@ -43,8 +44,8 @@ class _SignUpState extends State<SignUp2> {
   var uid = Uuid();
   File imagefile;
 
-  void _trysubmit(BuildContext ctx, String name, String email, String pwd,
-      String pwd1, String exp, String fee) {
+  Future<void> _trysubmit(BuildContext ctx, String name, String email,
+      String pwd, String pwd1, String exp, String fee) async {
     final isvalid = formkey.currentState.validate();
     FocusScope.of(ctx).unfocus();
     if (isvalid) {
@@ -578,7 +579,12 @@ class _SignUpState extends State<SignUp2> {
                             _pwd1.text,
                             _exp.text,
                             _fee.text,
-                          );
+                          ).then((value) {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => Form1()));
+                          });
                           _name.clear();
                           _email.clear();
                           _pwd.clear();

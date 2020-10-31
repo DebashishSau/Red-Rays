@@ -7,12 +7,12 @@ import 'package:plasma/Screen/profile.dart';
 import 'package:plasma/Search/Search.dart';
 import 'package:plasma/global.dart';
 
-class Bottom extends StatefulWidget {
+class Bottom1 extends StatefulWidget {
   @override
   _BottomState createState() => _BottomState();
 }
 
-class _BottomState extends State<Bottom> {
+class _BottomState extends State<Bottom1> {
   int index = 0;
   void tapped(int index1) {
     setState(() {
@@ -94,8 +94,8 @@ class _BottomState extends State<Bottom> {
               BottomNavigationBarItem(
                   icon: Icon(FontAwesomeIcons.search), title: Text("Search")),
               BottomNavigationBarItem(
-                  icon: Icon(FontAwesomeIcons.handHoldingWater),
-                  title: Text("Request")),
+                  icon: Icon(FontAwesomeIcons.handsHelping),
+                  title: Text("Donate")),
               BottomNavigationBarItem(
                   icon: Icon(FontAwesomeIcons.infoCircle), title: Text("FAQ")),
               BottomNavigationBarItem(
