@@ -98,7 +98,7 @@ class _ChoicesState extends State<Choices> {
                       width: 20,
                     ),
                     Text(
-                      "CONTINUE AS\nDOCTOR",
+                      "CONTINUE AS\nDONOR",
                       textAlign: TextAlign.center,
                       style: TextStyle(
                           color: Colors.white, fontSize: 25, letterSpacing: 2),
