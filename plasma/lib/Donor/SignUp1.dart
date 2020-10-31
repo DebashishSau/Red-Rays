@@ -2,15 +2,18 @@ import 'dart:io';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'package:firebase_ml_vision/firebase_ml_vision.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:plasma/bottombar/bottom.dart';
 import 'package:uuid/uuid.dart';
 
 AuthResult authResult;
 String user;
 int g = 1;
+VisionText visiontext;
 
 class SignUp2 extends StatefulWidget {
   final Function toggle;
@@ -29,8 +32,6 @@ class _SignUpState extends State<SignUp2> {
   TextEditingController _pwd1 = TextEditingController();
   TextEditingController _exp = TextEditingController();
   TextEditingController _fee = TextEditingController();
-  TextEditingController _deg = TextEditingController();
-  TextEditingController _language = TextEditingController();
   final _auth = FirebaseAuth.instance;
   bool check = false;
   final picker = ImagePicker();
@@ -41,15 +42,16 @@ class _SignUpState extends State<SignUp2> {
   final databaseReference = FirebaseDatabase.instance.reference();
   var uid = Uuid();
   File imagefile;
+
   void _trysubmit(BuildContext ctx, String name, String email, String pwd,
-      String pwd1, String exp, String fee, String degree, String language) {
+      String pwd1, String exp, String fee) {
     final isvalid = formkey.currentState.validate();
     FocusScope.of(ctx).unfocus();
     if (isvalid) {
       formkey.currentState.save();
     } else {}
     _submitAuthForm(name.trim(), email.trim(), pwd.trim(), pwd1.trim(),
-        exp.trim(), fee.trim(), degree.trim(), language.trim(), ctx);
+        exp.trim(), fee.trim(), ctx);
   }
 
   void _submitAuthForm(
@@ -59,8 +61,6 @@ class _SignUpState extends State<SignUp2> {
     var pwd2,
     var exp,
     var fee,
-    var degree,
-    var language,
     BuildContext ctx,
   ) async {
     try {
@@ -79,7 +79,7 @@ class _SignUpState extends State<SignUp2> {
     } catch (err) {
       print(err);
     }
-    //add(name1, email1, pwd1, exp, fee, degree, language);
+    add(name1, email1, pwd1, exp, fee);
   }
 
   Future uploadToStorage() async {
@@ -161,9 +161,9 @@ class _SignUpState extends State<SignUp2> {
   }
 
   Future<void> add(String username, String useremail, String passwd, String exp,
-      String fee, String degree, String language1) async {
+      String fee) async {
     // var uuid = new Uuid().v1();
-    DatabaseReference _color2 = databaseReference.child("Doctors").child(user);
+    DatabaseReference _color2 = databaseReference.child("Donator").child(user);
     final TransactionResult transactionResult =
         await _color2.runTransaction((MutableData mutableData) async {
       mutableData.value = (mutableData.value ?? 0) + 1;
@@ -173,14 +173,11 @@ class _SignUpState extends State<SignUp2> {
     if (transactionResult.committed) {
       _color2.push().set(<String, String>{
         "image": "true",
-        "username": "true",
+        "fullname": "true",
         "email": "true",
         "pwd": "true",
-        "exp": "true",
-        "fee": "true",
-        "degree": "true",
-        "language": "true",
-        "certificate": "true",
+        "bloodgroup": "true",
+        "location": "true",
         "uid": "true"
       }).then((_) {
         print('Transaction  committed.');
@@ -193,21 +190,22 @@ class _SignUpState extends State<SignUp2> {
     }
     _color2.set({
       "image": downloadurl,
-      "username": username,
+      "fullname": username,
       "email": useremail,
       "pwd": passwd,
-      "exp": exp,
-      "fee": fee,
-      "degree": degree,
-      "language": language1,
-      "certificate": downloadurl1,
+      "bloodgroup": exp,
+      "location": fee,
       "uid": user
     });
   }
 
-  void camera() async {
+  Future<void> camera() async {
     var pickedfile = await ImagePicker().getImage(source: ImageSource.camera);
     imagefile = File(pickedfile.path);
+    var firebasevision = FirebaseVisionImage.fromFile(imagefile);
+    var textrecognizer = FirebaseVision.instance.textRecognizer();
+    visiontext = await textrecognizer.processImage(firebasevision);
+    textrecognizer.close();
   }
 
   @override
@@ -295,7 +293,7 @@ class _SignUpState extends State<SignUp2> {
                                       },
                                       style: TextStyle(color: Colors.black),
                                       decoration: InputDecoration(
-                                        hintText: "Username",
+                                        hintText: "Fullname",
                                         hintStyle:
                                             TextStyle(color: Colors.black54),
                                         focusedBorder: OutlineInputBorder(
@@ -472,6 +470,12 @@ class _SignUpState extends State<SignUp2> {
                               ),
                               GestureDetector(
                                 onTap: () {
+                                  camera().then((value) {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => Bottom()));
+                                  });
                                   /*uploadToStorage1().then((value) {
                                     showDialog(
                                         context: context,
@@ -567,23 +571,20 @@ class _SignUpState extends State<SignUp2> {
                       GestureDetector(
                         onTap: () {
                           _trysubmit(
-                              context,
-                              _name.text,
-                              _email.text,
-                              _pwd.text,
-                              _pwd1.text,
-                              _exp.text,
-                              _fee.text,
-                              _deg.text,
-                              _language.text);
+                            context,
+                            _name.text,
+                            _email.text,
+                            _pwd.text,
+                            _pwd1.text,
+                            _exp.text,
+                            _fee.text,
+                          );
                           _name.clear();
                           _email.clear();
                           _pwd.clear();
                           _pwd1.clear();
                           _exp.clear();
                           _fee.clear();
-                          _deg.clear();
-                          _language.clear();
                         },
                         child: Container(
                           height: 40,

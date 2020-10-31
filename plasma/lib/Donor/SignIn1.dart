@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:plasma/GoogleAuth/google.dart';
-import 'package:plasma/scrren.dart';
+import 'package:plasma/bottombar/bottom.dart';
 
 class SignIn1 extends StatefulWidget {
   final Function toggle;
@@ -56,22 +56,22 @@ class _SignInState extends State<SignIn1> {
                     decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.all(Radius.circular(20))),
-                    /*child: Center(
+                    child: Center(
                       child: Container(
                         height: 100,
                         width: 100,
                         decoration: BoxDecoration(
                             image: DecorationImage(
-                                image: AssetImage("assets/load.gif"),
+                                image: AssetImage("images/logo.png"),
                                 fit: BoxFit.cover)),
                       ),
-                    ),*/
+                    ),
                   ),
                   SizedBox(
                     height: 30,
                   ),
                   Text(
-                    "STARTING VIRAGO",
+                    "STARTING RED RAYS",
                     style: TextStyle(
                       fontSize: 25,
                       color: Colors.white,
@@ -221,7 +221,7 @@ class _SignInState extends State<SignIn1> {
                                       Navigator.pushReplacement(
                                           context,
                                           MaterialPageRoute(
-                                              builder: (context) => Screen()));
+                                              builder: (context) => Bottom()));
                                     } else {
                                       print("not");
                                     }
@@ -312,7 +312,7 @@ class _SignInState extends State<SignIn1> {
                                   Navigator.of(context).push(
                                     MaterialPageRoute(
                                       builder: (context) {
-                                        return Screen();
+                                        return Bottom();
                                       },
                                     ),
                                   );

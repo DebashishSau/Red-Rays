@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:plasma/GoogleAuth/google.dart';
-import 'package:plasma/scrren.dart';
+import 'package:plasma/bottombar/bottom.dart';
 
 class SignIn extends StatefulWidget {
   final Function toggle;
@@ -62,7 +62,7 @@ class _SignInState extends State<SignIn> {
                         width: 100,
                         decoration: BoxDecoration(
                             image: DecorationImage(
-                                image: AssetImage("assets/load.gif"),
+                                image: AssetImage("images/logo.png"),
                                 fit: BoxFit.cover)),
                       ),
                     ),
@@ -71,7 +71,7 @@ class _SignInState extends State<SignIn> {
                     height: 30,
                   ),
                   Text(
-                    "STARTING ADIRA",
+                    "STARTING RED RAYS",
                     style: TextStyle(
                       fontSize: 25,
                       color: Colors.white,
@@ -85,20 +85,20 @@ class _SignInState extends State<SignIn> {
           )
         : Scaffold(
             appBar: AppBar(
-              automaticallyImplyLeading: true,
-              backgroundColor: Color(0xFFFFC0CB),
               elevation: 0,
+              automaticallyImplyLeading: true,
               iconTheme: IconThemeData(color: Colors.black),
+              backgroundColor: Colors.white,
             ),
             backgroundColor: Colors.white,
             body: Container(
               child: Column(
                 children: [
                   Container(
-                    color: Color(0xFFFFC0CB),
+                    color: Colors.white,
                     child: Container(
-                      height: 300,
-                      /*child: Center(
+                      height: 270,
+                      child: Center(
                         child: Container(
                           height: 200,
                           width: 240,
@@ -106,10 +106,10 @@ class _SignInState extends State<SignIn> {
                               borderRadius:
                                   BorderRadius.all(Radius.circular(10)),
                               image: DecorationImage(
-                                  image: AssetImage("assets/Logo.png"),
+                                  image: AssetImage("images/logo.png"),
                                   fit: BoxFit.cover)),
                         ),
-                      ),*/
+                      ),
                     ),
                   ),
                   Expanded(
@@ -218,7 +218,10 @@ class _SignInState extends State<SignIn> {
                                   formkey.currentState.save();
                                   signIn(_email.text, _pwd.text).then((user) {
                                     if (user != null) {
-                                      //Navigation after authenitication
+                                      Navigator.pushReplacement(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) => Bottom()));
                                     } else {
                                       print("not");
                                     }
@@ -229,7 +232,7 @@ class _SignInState extends State<SignIn> {
                                 height: 40,
                                 width: 300,
                                 decoration: BoxDecoration(
-                                    color: Color(0xFFFF69B4),
+                                    color: Colors.blue[900],
                                     borderRadius:
                                         BorderRadius.all(Radius.circular(10))),
                                 child: Center(
@@ -295,7 +298,7 @@ class _SignInState extends State<SignIn> {
                                     child: Text(
                                       " Sign Up.",
                                       style: TextStyle(
-                                          color: Color(0xFFFF69B4),
+                                          color: Color(0xFF9F000F),
                                           fontWeight: FontWeight.w900,
                                           fontSize: 17),
                                     ),
@@ -309,7 +312,7 @@ class _SignInState extends State<SignIn> {
                                   Navigator.of(context).push(
                                     MaterialPageRoute(
                                       builder: (context) {
-                                        return Screen();
+                                        return Bottom();
                                       },
                                     ),
                                   );
@@ -319,7 +322,7 @@ class _SignInState extends State<SignIn> {
                                 height: 40,
                                 width: 350,
                                 decoration: BoxDecoration(
-                                    color: Color(0xFFFF69B4),
+                                    color: Colors.blue[900],
                                     borderRadius:
                                         BorderRadius.all(Radius.circular(10))),
                                 child: Row(

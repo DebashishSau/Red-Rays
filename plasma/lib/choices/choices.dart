@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:plasma/Donor/Authenticate1.dart';
-import 'package:plasma/GoogleAuth/Login%20and%20signup/Authenticate.dart';
+import 'package:plasma/Patient/Authenticate.dart';
 
 class Choices extends StatefulWidget {
   @override

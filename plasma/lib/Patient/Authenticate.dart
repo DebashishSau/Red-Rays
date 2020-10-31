@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'SignIn.dart';
-import 'SignUp.dart';
+import 'package:plasma/Patient/signin.dart';
+import 'package:plasma/Patient/signup.dart';
 
 class Authenticate extends StatefulWidget {
   @override

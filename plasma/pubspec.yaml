@@ -36,6 +36,8 @@ dependencies:
   firebase_core:
   firebase_ml_vision:
   image_picker: ^0.6.3+1
+  font_awesome_flutter: ^8.8.1
+  material_design_icons_flutter: ^4.0.5655
   uuid: ^2.0.4
 
 dev_dependencies:

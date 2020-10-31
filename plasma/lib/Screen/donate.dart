@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class Screen extends StatefulWidget {
+class Donate extends StatefulWidget {
   @override
-  _ScreenState createState() => _ScreenState();
+  _FeedState createState() => _FeedState();
 }
 
-class _ScreenState extends State<Screen> {
+class _FeedState extends State<Donate> {
   @override
   Widget build(BuildContext context) {
     return Scaffold();
