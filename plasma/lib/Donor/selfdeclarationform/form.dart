@@ -689,6 +689,14 @@ class _FormState extends State<Form1> {
                 "I prohibit any information provided by me or about my donation to be disclosed to any individual or government agency without my prior concerns",
               ),
             ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                "Add your digital Signature below",
+                style:
+                    TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+              ),
+            ),
             Signature(
               controller: _controller,
               height: 300,
