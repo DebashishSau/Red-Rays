@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:plasma/Donor/Screen/donate1.dart';
 import 'package:plasma/Donor/Screen/feed1.dart';
+import 'package:plasma/Donor/Screen/form1.dart';
 import 'package:plasma/Donor/Screen/profile1.dart';
 import 'package:plasma/Donor/Screen/search1.dart';
 
@@ -37,22 +38,22 @@ class _BottomState extends State<Bottom1> {
             .reference()
             .child("Donator")
             .child(uid1)
-            .child("username")
+            .child("fullname")
             .once()
             .then((DataSnapshot s) {
-          globalname = s.value;
+          globalname1 = s.value;
         });
       });
       values.forEach((key, value) {
         //
         FirebaseDatabase.instance
             .reference()
-            .child("Patients")
+            .child("Donator")
             .child(uid1)
             .child("image")
             .once()
             .then((DataSnapshot s) {
-          globalimage = s.value;
+          globalimage1 = s.value;
         });
       });
     });
@@ -69,8 +70,8 @@ class _BottomState extends State<Bottom1> {
     List<Widget> widget1 = [
       Feed1(),
       Search1(),
+      Form1(),
       Donate1(),
-      Profile1(),
       Profile1(),
     ];
 
@@ -98,7 +99,7 @@ class _BottomState extends State<Bottom1> {
                   icon: Icon(FontAwesomeIcons.handsHelping),
                   title: Text("Donate")),
               BottomNavigationBarItem(
-                  icon: Icon(FontAwesomeIcons.infoCircle), title: Text("FAQ")),
+                  icon: Icon(FontAwesomeIcons.list), title: Text("Requests")),
               BottomNavigationBarItem(
                   icon: Icon(Icons.person), title: Text("Profile")),
             ]),

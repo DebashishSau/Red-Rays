@@ -180,18 +180,17 @@ class _PostState extends State<Donate> {
                       child: Row(
                         children: [
                           SizedBox(
-                            width: 35,
+                            width: 38,
                           ),
                           Text(
-                            "Upload your covid report",
+                            "Upload the diagnostic/medical proof",
                             style: TextStyle(
                                 color: Colors.black,
-                                letterSpacing: 3,
-                                fontSize: 19,
+                                fontSize: 16,
                                 fontWeight: FontWeight.w400),
                           ),
                           SizedBox(
-                            width: 19,
+                            width: 12,
                           ),
                           GestureDetector(
                             onTap: () {

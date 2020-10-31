@@ -167,7 +167,11 @@ class _BlogsState extends State<Feed> {
                                                                 MaterialPageRoute(
                                                                     builder:
                                                                         (context) =>
-                                                                            Chat()));
+                                                                            Chat(
+                                                                              image: snapshot1.data.value['donarimage'],
+                                                                              name: snapshot1.data.value['donarname'],
+                                                                              uid: snapshot1.data.value['uid'],
+                                                                            )));
                                                           }
                                                         },
                                                         child: Icon(

@@ -456,49 +456,6 @@ class _SignUpState extends State<SignUp> {
                                   ),
                                 ),
                               ),
-                              GestureDetector(
-                                onTap: () {
-                                  /*uploadToStorage1().then((value) {
-                                    showDialog(
-                                        context: context,
-                                        builder: (context) {
-                                          Future.delayed(Duration(seconds: 5),
-                                              () {
-                                            Navigator.of(context).pop(true);
-                                          });
-                                          return AlertDialog(
-                                            content: g == 0
-                                                ? CircularProgressIndicator()
-                                                : Icon(Icons.check,
-                                                    color: Colors.green),
-                                          );
-                                        });
-                                  });*/
-                                },
-                                child: Container(
-                                  height: 50,
-                                  width: 300,
-                                  color: Color(0xFFFFC0CB),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    children: [
-                                      Icon(
-                                        Icons.attachment,
-                                        size: 30,
-                                      ),
-                                      SizedBox(
-                                        width: 10,
-                                      ),
-                                      Text(
-                                        "Diagnostic report",
-                                        style: TextStyle(fontSize: 19),
-                                      )
-                                    ],
-                                  ),
-                                ),
-                              ),
                             ],
                           ),
                         ),
