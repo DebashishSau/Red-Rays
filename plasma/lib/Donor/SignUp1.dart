@@ -45,14 +45,13 @@ class _SignUpState extends State<SignUp2> {
   File imagefile;
 
   Future<void> _trysubmit(BuildContext ctx, String name, String email,
-      String pwd, String pwd1, String exp, String fee) async {
+      String pwd, String pwd1) async {
     final isvalid = formkey.currentState.validate();
     FocusScope.of(ctx).unfocus();
     if (isvalid) {
       formkey.currentState.save();
     } else {}
-    _submitAuthForm(name.trim(), email.trim(), pwd.trim(), pwd1.trim(),
-        exp.trim(), fee.trim(), ctx);
+    _submitAuthForm(name.trim(), email.trim(), pwd.trim(), pwd1.trim(), ctx);
   }
 
   void _submitAuthForm(
@@ -60,8 +59,6 @@ class _SignUpState extends State<SignUp2> {
     var email1,
     var pwd1,
     var pwd2,
-    var exp,
-    var fee,
     BuildContext ctx,
   ) async {
     try {
@@ -80,7 +77,7 @@ class _SignUpState extends State<SignUp2> {
     } catch (err) {
       print(err);
     }
-    add(name1, email1, pwd1, exp, fee);
+    add(name1, email1, pwd1);
   }
 
   Future uploadToStorage() async {
@@ -161,8 +158,7 @@ class _SignUpState extends State<SignUp2> {
     return downloadurl1;
   }
 
-  Future<void> add(String username, String useremail, String passwd, String exp,
-      String fee) async {
+  Future<void> add(String username, String useremail, String passwd) async {
     // var uuid = new Uuid().v1();
     DatabaseReference _color2 = databaseReference.child("Donator").child(user);
     final TransactionResult transactionResult =
@@ -177,8 +173,6 @@ class _SignUpState extends State<SignUp2> {
         "fullname": "true",
         "email": "true",
         "pwd": "true",
-        "bloodgroup": "true",
-        "location": "true",
         "uid": "true"
       }).then((_) {
         print('Transaction  committed.');
@@ -194,8 +188,6 @@ class _SignUpState extends State<SignUp2> {
       "fullname": username,
       "email": useremail,
       "pwd": passwd,
-      "bloodgroup": exp,
-      "location": fee,
       "uid": user
     });
   }
@@ -413,62 +405,6 @@ class _SignUpState extends State<SignUp2> {
                                   ),
                                 ),
                               ),
-                              Padding(
-                                padding:
-                                    const EdgeInsets.fromLTRB(10, 0, 10, 0),
-                                child: Container(
-                                  color: Colors.white10,
-                                  child: Padding(
-                                    padding: const EdgeInsets.fromLTRB(
-                                        10, 0, 10, 10),
-                                    child: TextFormField(
-                                      controller: _exp,
-                                      style: TextStyle(color: Colors.black),
-                                      decoration: InputDecoration(
-                                        hintText: "Blood Group",
-                                        hintStyle:
-                                            TextStyle(color: Colors.black54),
-                                        focusedBorder: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                        ),
-                                        enabledBorder: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              Padding(
-                                padding:
-                                    const EdgeInsets.fromLTRB(10, 0, 10, 0),
-                                child: Container(
-                                  color: Colors.white10,
-                                  child: Padding(
-                                    padding: const EdgeInsets.fromLTRB(
-                                        10, 0, 10, 10),
-                                    child: TextFormField(
-                                      controller: _fee,
-                                      style: TextStyle(color: Colors.black),
-                                      decoration: InputDecoration(
-                                        hintText: "Location",
-                                        hintStyle:
-                                            TextStyle(color: Colors.black54),
-                                        focusedBorder: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                        ),
-                                        enabledBorder: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
                               GestureDetector(
                                 onTap: () {
                                   camera().then((value) {
@@ -577,20 +513,20 @@ class _SignUpState extends State<SignUp2> {
                             _email.text,
                             _pwd.text,
                             _pwd1.text,
-                            _exp.text,
-                            _fee.text,
                           ).then((value) {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => Form1()));
+                                    builder: (context) => Form1(
+                                          image: downloadurl,
+                                        )));
+                            _name.clear();
+                            _email.clear();
+                            _pwd.clear();
+                            _pwd1.clear();
+                            _exp.clear();
+                            _fee.clear();
                           });
-                          _name.clear();
-                          _email.clear();
-                          _pwd.clear();
-                          _pwd1.clear();
-                          _exp.clear();
-                          _fee.clear();
                         },
                         child: Container(
                           height: 40,

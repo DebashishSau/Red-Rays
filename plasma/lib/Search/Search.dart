@@ -1,4 +1,11 @@
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:plasma/global.dart';
+
+int _value = 0;
+int _value1 = 0;
+String blood;
+String location;
 
 class Search extends StatefulWidget {
   @override
@@ -6,79 +13,33 @@ class Search extends StatefulWidget {
 }
 
 class _SearchState extends State<Search> {
-  final List<String> _dropdownValues1 = [
-    "A",
-    "A+",
-    "B",
-    "B+",
-    "O+",
-    "O-",
-    "AB"
-  ];
-
-  final List<String> _dropdownValues = [
-    "Chennai",
-    "Pune",
-    "Delhi",
-    "Mumbai",
-    "Lucknow"
-  ];
-  _displayDialog1(BuildContext context) async {
-    return showDialog(
-        context: context,
-        builder: (context) {
-          return AlertDialog(
-            title: Text('Blood Group'),
-            content: DropdownButton(
-              items: _dropdownValues1
-                  .map((value) => DropdownMenuItem(
-                        child: Text(value),
-                        value: value,
-                      ))
-                  .toList(),
-              onChanged: (String value) {},
-              isExpanded: false,
-              hint: Text('Select Blood Group'),
-            ),
-            actions: <Widget>[
-              new FlatButton(
-                child: new Text('CANCEL'),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-              )
-            ],
-          );
+  Future read() async {
+    FirebaseDatabase.instance
+        .reference()
+        .child("Consentform")
+        .child(blood)
+        .child(location)
+        .once()
+        .then((DataSnapshot snapshot) {
+      Map<dynamic, dynamic> values;
+      values = snapshot.value;
+      color.clear();
+      values.forEach((key, value) {
+        //
+        FirebaseDatabase.instance
+            .reference()
+            .child("Consentform")
+            .child(blood)
+            .child(location)
+            .child(key)
+            .child("fullname")
+            .once()
+            .then((DataSnapshot s) {
+          color.add(s.value);
         });
-  }
-
-  _displayDialog(BuildContext context) async {
-    return showDialog(
-        context: context,
-        builder: (context) {
-          return AlertDialog(
-            title: Text('Location'),
-            content: DropdownButton(
-              items: _dropdownValues
-                  .map((value) => DropdownMenuItem(
-                        child: Text(value),
-                        value: value,
-                      ))
-                  .toList(),
-              onChanged: (String value) {},
-              isExpanded: false,
-              hint: Text('Select City'),
-            ),
-            actions: <Widget>[
-              new FlatButton(
-                child: new Text('CANCEL'),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-              )
-            ],
-          );
-        });
+      });
+      print(color);
+    });
   }
 
   @override
@@ -121,42 +82,137 @@ class _SearchState extends State<Search> {
                   SizedBox(
                     height: 40,
                   ),
-                  GestureDetector(
-                    onTap: () {
-                      _displayDialog1(context);
-                    },
-                    child: Container(
-                      height: 40,
-                      width: 400,
-                      child: Center(child: Text('Select Blood Group')),
-                      color: Colors.white,
+                  Container(
+                    height: 40,
+                    width: 400,
+                    child: Center(
+                      child: DropdownButton(
+                          elevation: 0,
+                          onChanged: (value) {
+                            setState(() {
+                              _value1 = value;
+                              if (_value1 == 1) {
+                                blood = "A+";
+                              }
+                              if (_value1 == 2) {
+                                blood = "B+";
+                              }
+                              if (_value1 == 3) {
+                                blood = "A";
+                              }
+                              if (_value1 == 4) {
+                                blood = "B";
+                              }
+                              if (_value1 == 5) {
+                                blood = "O+";
+                              }
+                              if (_value1 == 6) {
+                                blood = "O-";
+                              }
+                              if (_value1 == 7) {
+                                blood = "AB";
+                              }
+                            });
+                          },
+                          value: _value1,
+                          items: [
+                            DropdownMenuItem(
+                              child: Center(child: Text("Select Blood Group")),
+                              value: 0,
+                            ),
+                            DropdownMenuItem(
+                              child: Center(child: Text("A+")),
+                              value: 1,
+                            ),
+                            DropdownMenuItem(
+                              child: Center(child: Text("B+")),
+                              value: 2,
+                            ),
+                            DropdownMenuItem(
+                              child: Center(child: Text("A")),
+                              value: 3,
+                            ),
+                            DropdownMenuItem(
+                              child: Center(child: Text("B")),
+                              value: 4,
+                            ),
+                            DropdownMenuItem(
+                              child: Center(child: Text("o+")),
+                              value: 5,
+                            ),
+                            DropdownMenuItem(
+                              child: Center(child: Text("o-")),
+                              value: 6,
+                            ),
+                            DropdownMenuItem(
+                              child: Center(child: Text("AB")),
+                              value: 7,
+                            )
+                          ]),
                     ),
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      _displayDialog(context);
-                    },
-                    child: Container(
-                      height: 40,
-                      width: 400,
-                      child: Center(child: Text('Select Location')),
-                      color: Colors.white,
-                    ),
+                    color: Colors.white,
                   ),
                   SizedBox(
                     height: 20,
                   ),
                   Container(
                     height: 40,
-                    width: 200,
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.all(Radius.circular(10))),
+                    width: 400,
                     child: Center(
-                      child: Text("SEARCH"),
+                      child: DropdownButton(
+                          elevation: 0,
+                          onChanged: (value) {
+                            setState(() {
+                              _value = value;
+                              if (_value == 1) {
+                                location = "Lucknow";
+                              }
+                              if (_value == 2) {
+                                location = "Delhi";
+                              }
+                              if (_value == 3) {
+                                location = "Chennai";
+                              }
+                            });
+                          },
+                          value: _value,
+                          items: [
+                            DropdownMenuItem(
+                              child: Text("Select Location"),
+                              value: 0,
+                            ),
+                            DropdownMenuItem(
+                              child: Text("Lucknow"),
+                              value: 1,
+                            ),
+                            DropdownMenuItem(
+                              child: Text("Delhi"),
+                              value: 2,
+                            ),
+                            DropdownMenuItem(
+                              child: Text("Chennai"),
+                              value: 3,
+                            )
+                          ]),
+                    ),
+                    color: Colors.white,
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      read();
+                    },
+                    child: Container(
+                      height: 40,
+                      width: 200,
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.all(Radius.circular(10))),
+                      child: Center(
+                        child: Text("SEARCH"),
+                      ),
                     ),
                   )
                 ],

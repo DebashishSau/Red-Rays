@@ -1,8 +1,10 @@
 import 'package:delayed_display/delayed_display.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:plasma/Donor/Authenticate1.dart';
 import 'package:plasma/Donor/SignIn1.dart';
 import 'package:signature/signature.dart';
+import 'package:uuid/uuid.dart';
 
 int _value = 0;
 int _value1 = 0;
@@ -13,6 +15,9 @@ int _value5 = 0;
 int _value6 = 0;
 
 class Form1 extends StatefulWidget {
+  final String image;
+
+  const Form1({Key key, this.image}) : super(key: key);
   @override
   _FormState createState() => _FormState();
 }
@@ -30,7 +35,9 @@ class _FormState extends State<Form1> {
   TextEditingController _fee2 = TextEditingController();
   TextEditingController _fee3 = TextEditingController();
   TextEditingController _fee4 = TextEditingController();
+  TextEditingController _exp4 = TextEditingController();
 
+  final databaseReference = FirebaseDatabase.instance.reference();
   final SignatureController _controller =
       SignatureController(penStrokeWidth: 5, penColor: Colors.blue);
   @override
@@ -38,6 +45,71 @@ class _FormState extends State<Form1> {
     super.initState();
     _controller.addListener(() {
       print("Value Changed");
+    });
+  }
+
+  Future<void> add3(
+      String name,
+      String gen,
+      String date,
+      String age,
+      String father,
+      String ocup,
+      String organ,
+      String add,
+      String no,
+      String location,
+      String blood) async {
+    var uuid = new Uuid().v1();
+    DatabaseReference _color2 = databaseReference
+        .child("Consentform")
+        .child(blood)
+        .child(location)
+        .child(uuid);
+    final TransactionResult transactionResult =
+        await _color2.runTransaction((MutableData mutableData) async {
+      mutableData.value = (mutableData.value ?? 0) + 1;
+
+      return mutableData;
+    });
+    if (transactionResult.committed) {
+      _color2.push().set(<String, String>{
+        "image": "true",
+        "fullname": "true",
+        "gender": "true",
+        "dob": "true",
+        "age": "true",
+        "father": "true",
+        "occu": "true",
+        "org": "true",
+        "add": "true",
+        "no": "true",
+        "blood": "true",
+        "location": "true",
+        "uid": "true"
+      }).then((_) {
+        print('Transaction  committed.');
+      });
+    } else {
+      print('Transaction not committed.');
+      if (transactionResult.error != null) {
+        print(transactionResult.error.message);
+      }
+    }
+    _color2.set({
+      "image": widget.image,
+      "fullname": name,
+      "gender": gen,
+      "dob": date,
+      "age": age,
+      "father": father,
+      "occu": ocup,
+      "org": organ,
+      "add": add,
+      "no": no,
+      "blood": blood,
+      "location": location,
+      "uid": uuid
     });
   }
 
@@ -266,6 +338,52 @@ class _FormState extends State<Form1> {
                           style: TextStyle(color: Colors.black),
                           decoration: InputDecoration(
                             hintText: "Address for Communication",
+                            hintStyle: TextStyle(color: Colors.black54),
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                    child: Container(
+                      color: Colors.white10,
+                      child: Padding(
+                        padding: const EdgeInsets.fromLTRB(10, 0, 10, 10),
+                        child: TextFormField(
+                          controller: _exp4,
+                          style: TextStyle(color: Colors.black),
+                          decoration: InputDecoration(
+                            hintText: "Blood Group",
+                            hintStyle: TextStyle(color: Colors.black54),
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                    child: Container(
+                      color: Colors.white10,
+                      child: Padding(
+                        padding: const EdgeInsets.fromLTRB(10, 0, 10, 10),
+                        child: TextFormField(
+                          controller: _fee4,
+                          style: TextStyle(color: Colors.black),
+                          decoration: InputDecoration(
+                            hintText: "Location",
                             hintStyle: TextStyle(color: Colors.black54),
                             focusedBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10),
@@ -592,51 +710,67 @@ class _FormState extends State<Form1> {
                           var data = await _controller.toPngBytes();
                           if (formkey.currentState.validate()) {
                             formkey.currentState.save();
-
-                            setState(() {
-                              _value = 0;
-                              _value1 = 0;
-                              _value2 = 0;
-                              _value3 = 0;
-                              _value4 = 0;
-                              _value5 = 0;
-                              _value6 = 0;
-                              _controller.clear();
-                              _name.clear();
-                              _email.clear();
-                              _pwd.clear();
-                              _pwd1.clear();
-                              _exp.clear();
-                              _fee.clear();
-                              _fee1.clear();
-                              _fee2.clear();
-                              _fee3.clear();
-                              _fee4.clear();
-                            });
+                            add3(
+                              _name.text,
+                              _email.text,
+                              _pwd.text,
+                              _pwd1.text,
+                              _exp.text,
+                              _fee.text,
+                              _fee1.text,
+                              _fee2.text,
+                              _fee3.text,
+                              _fee4.text,
+                              _exp4.text,
+                            ).then((value) => {
+                                  setState(() {
+                                    _value = 0;
+                                    _value1 = 0;
+                                    _value2 = 0;
+                                    _value3 = 0;
+                                    _value4 = 0;
+                                    _value5 = 0;
+                                    _value6 = 0;
+                                    _controller.clear();
+                                    _name.clear();
+                                    _email.clear();
+                                    _pwd.clear();
+                                    _pwd1.clear();
+                                    _exp.clear();
+                                    _fee.clear();
+                                    _fee1.clear();
+                                    _fee2.clear();
+                                    _fee3.clear();
+                                    _fee4.clear();
+                                    _exp4.clear();
+                                  }),
+                                  showDialog(
+                                      context: context,
+                                      builder: (context) {
+                                        Future.delayed(Duration(seconds: 3),
+                                            () {
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      Authenticate1()));
+                                        });
+                                        return DelayedDisplay(
+                                          slidingCurve: Curves.easeIn,
+                                          delay: Duration(seconds: 2),
+                                          child: AlertDialog(
+                                            content: Text(
+                                              "Donor Verified !",
+                                              style: TextStyle(
+                                                  color: Colors.black,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                          ),
+                                        );
+                                      })
+                                });
                           }
                         }
-                        showDialog(
-                            context: context,
-                            builder: (context) {
-                              Future.delayed(Duration(seconds: 3), () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => Authenticate1()));
-                              });
-                              return DelayedDisplay(
-                                slidingCurve: Curves.easeIn,
-                                delay: Duration(seconds: 2),
-                                child: AlertDialog(
-                                  content: Text(
-                                    "Donor Verified !",
-                                    style: TextStyle(
-                                        color: Colors.black,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                ),
-                              );
-                            });
                       }),
                   IconButton(
                       icon: Icon(
