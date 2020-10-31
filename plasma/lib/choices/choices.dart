@@ -58,18 +58,6 @@ class _ChoicesState extends State<Choices> {
                             fontSize: 25,
                             letterSpacing: 2),
                       ),
-                      SizedBox(
-                        width: 20,
-                      ),
-                      Container(
-                        height: 100,
-                        width: 100,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          image: DecorationImage(
-                              image: AssetImage("images/p.gif")),
-                        ),
-                      ),
                     ],
                   ),
                 ),
@@ -85,18 +73,6 @@ class _ChoicesState extends State<Choices> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Container(
-                      height: 100,
-                      width: 100,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        image:
-                            DecorationImage(image: AssetImage("images/d.jpg")),
-                      ),
-                    ),
-                    SizedBox(
-                      width: 20,
-                    ),
                     Text(
                       "CONTINUE AS\nDONOR",
                       textAlign: TextAlign.center,
