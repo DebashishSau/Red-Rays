@@ -1,10 +1,11 @@
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:plasma/Screen/donate.dart';
-import 'package:plasma/Screen/feed.dart';
-import 'package:plasma/Screen/profile.dart';
-import 'package:plasma/Search/Search.dart';
+import 'package:plasma/Donor/Screen/donate1.dart';
+import 'package:plasma/Donor/Screen/feed1.dart';
+import 'package:plasma/Donor/Screen/profile1.dart';
+import 'package:plasma/Donor/Screen/search1.dart';
+
 import 'package:plasma/global.dart';
 
 class Bottom1 extends StatefulWidget {
@@ -23,7 +24,7 @@ class _BottomState extends State<Bottom1> {
   Future read() async {
     FirebaseDatabase.instance
         .reference()
-        .child("Patients")
+        .child("Donator")
         .child(uid1)
         .once()
         .then((DataSnapshot snapshot) {
@@ -34,7 +35,7 @@ class _BottomState extends State<Bottom1> {
         //
         FirebaseDatabase.instance
             .reference()
-            .child("Patients")
+            .child("Donator")
             .child(uid1)
             .child("username")
             .once()
@@ -66,11 +67,11 @@ class _BottomState extends State<Bottom1> {
   @override
   Widget build(BuildContext context) {
     List<Widget> widget1 = [
-      Feed(),
-      Search(),
-      Donate(),
-      Profile(),
-      Profile(),
+      Feed1(),
+      Search1(),
+      Donate1(),
+      Profile1(),
+      Profile1(),
     ];
 
     return Scaffold(
