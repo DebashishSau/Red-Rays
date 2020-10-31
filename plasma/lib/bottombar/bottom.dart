@@ -4,7 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:plasma/Screen/donate.dart';
 import 'package:plasma/Screen/feed.dart';
 import 'package:plasma/Screen/profile.dart';
-import 'package:plasma/Screen/request.dart';
+import 'package:plasma/Search/Search.dart';
 
 class Bottom extends StatefulWidget {
   @override
@@ -66,7 +66,7 @@ class _BottomState extends State<Bottom> {
   Widget build(BuildContext context) {
     List<Widget> widget1 = [
       Feed(),
-      Request(),
+      Search(),
       Donate(),
       Profile(),
       Profile(),

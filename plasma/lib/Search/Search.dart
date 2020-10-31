@@ -6,6 +6,81 @@ class Search extends StatefulWidget {
 }
 
 class _SearchState extends State<Search> {
+  final List<String> _dropdownValues1 = [
+    "A",
+    "A+",
+    "B",
+    "B+",
+    "O+",
+    "O-",
+    "AB"
+  ];
+
+  final List<String> _dropdownValues = [
+    "Chennai",
+    "Pune",
+    "Delhi",
+    "Mumbai",
+    "Lucknow"
+  ];
+  _displayDialog1(BuildContext context) async {
+    return showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Text('Blood Group'),
+            content: DropdownButton(
+              items: _dropdownValues1
+                  .map((value) => DropdownMenuItem(
+                        child: Text(value),
+                        value: value,
+                      ))
+                  .toList(),
+              onChanged: (String value) {},
+              isExpanded: false,
+              hint: Text('Select Blood Group'),
+            ),
+            actions: <Widget>[
+              new FlatButton(
+                child: new Text('CANCEL'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              )
+            ],
+          );
+        });
+  }
+
+  _displayDialog(BuildContext context) async {
+    return showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Text('Location'),
+            content: DropdownButton(
+              items: _dropdownValues
+                  .map((value) => DropdownMenuItem(
+                        child: Text(value),
+                        value: value,
+                      ))
+                  .toList(),
+              onChanged: (String value) {},
+              isExpanded: false,
+              hint: Text('Select City'),
+            ),
+            actions: <Widget>[
+              new FlatButton(
+                child: new Text('CANCEL'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              )
+            ],
+          );
+        });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,40 +118,32 @@ class _SearchState extends State<Search> {
                       ),
                     ],
                   ),
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(10, 40, 10, 0),
+                  SizedBox(
+                    height: 40,
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      _displayDialog1(context);
+                    },
                     child: Container(
+                      height: 40,
+                      width: 400,
+                      child: Center(child: Text('Select Blood Group')),
                       color: Colors.white,
-                      child: Padding(
-                        padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-                        child: TextFormField(
-                          style: TextStyle(color: Colors.black),
-                          decoration: InputDecoration(
-                            hintText: "Blood Group (ex. B+)",
-                            hintStyle: TextStyle(color: Colors.black54),
-                            focusedBorder: InputBorder.none,
-                            enabledBorder: InputBorder.none,
-                          ),
-                        ),
-                      ),
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      _displayDialog(context);
+                    },
                     child: Container(
+                      height: 40,
+                      width: 400,
+                      child: Center(child: Text('Select Location')),
                       color: Colors.white,
-                      child: Padding(
-                        padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-                        child: TextFormField(
-                          style: TextStyle(color: Colors.black),
-                          decoration: InputDecoration(
-                            hintText: "City (ex. Pune)",
-                            hintStyle: TextStyle(color: Colors.black54),
-                            focusedBorder: InputBorder.none,
-                            enabledBorder: InputBorder.none,
-                          ),
-                        ),
-                      ),
                     ),
                   ),
                   SizedBox(
