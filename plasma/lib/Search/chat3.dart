@@ -6,17 +6,17 @@ import 'package:plasma/global.dart';
 import 'package:flutter_dialogflow/dialogflow_v2.dart';
 import 'package:bubble/bubble.dart';
 
-class Chat extends StatefulWidget {
+class Chat3 extends StatefulWidget {
   final String image;
   final String name;
   final String uid;
 
-  const Chat({Key key, this.image, this.name, this.uid}) : super(key: key);
+  const Chat3({Key key, this.image, this.name, this.uid}) : super(key: key);
   @override
   _ChatState createState() => _ChatState();
 }
 
-class _ChatState extends State<Chat> {
+class _ChatState extends State<Chat3> {
   ClientRole _role = ClientRole.Broadcaster;
 
   Future<void> onJoin() async {

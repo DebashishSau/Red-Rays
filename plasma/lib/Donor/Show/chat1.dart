@@ -6,17 +6,17 @@ import 'package:plasma/global.dart';
 import 'package:flutter_dialogflow/dialogflow_v2.dart';
 import 'package:bubble/bubble.dart';
 
-class Chat extends StatefulWidget {
+class Chat2 extends StatefulWidget {
   final String image;
   final String name;
   final String uid;
 
-  const Chat({Key key, this.image, this.name, this.uid}) : super(key: key);
+  const Chat2({Key key, this.image, this.name, this.uid}) : super(key: key);
   @override
   _ChatState createState() => _ChatState();
 }
 
-class _ChatState extends State<Chat> {
+class _ChatState extends State<Chat2> {
   ClientRole _role = ClientRole.Broadcaster;
 
   Future<void> onJoin() async {
@@ -75,7 +75,7 @@ class _ChatState extends State<Chat> {
               children: <Widget>[
                 CircleAvatar(
                   backgroundImage:
-                      NetworkImage(data == 0 ? widget.image : globalimage),
+                      NetworkImage(data == 0 ? widget.image : globalimage1),
                 ),
                 SizedBox(
                   width: 10.0,
@@ -103,26 +103,26 @@ class _ChatState extends State<Chat> {
                 onJoin();
               })
         ],
+        leading: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: CircleAvatar(
+            radius: 30,
+            backgroundImage: NetworkImage(widget.image),
+          ),
+        ),
         automaticallyImplyLeading: true,
         iconTheme: IconThemeData(color: Colors.black),
         backgroundColor: Colors.white,
         elevation: 0,
-        title: Row(
-          children: [
-            CircleAvatar(
-              radius: 16,
-              backgroundColor: Colors.transparent,
-              backgroundImage: NetworkImage(widget.image),
-            ),
-            Text(
-              widget.name,
-              style: TextStyle(
-                  color: Colors.black,
-                  letterSpacing: 10,
-                  fontSize: 20,
-                  fontWeight: FontWeight.w400),
-            ),
-          ],
+        title: Center(
+          child: Text(
+            widget.name,
+            style: TextStyle(
+                color: Colors.black,
+                letterSpacing: 10,
+                fontSize: 14,
+                fontWeight: FontWeight.w400),
+          ),
         ),
       ),
       body: Container(

@@ -1,5 +1,6 @@
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:plasma/Donor/Show/chat1.dart';
 import 'package:plasma/global.dart';
 import 'package:uuid/uuid.dart';
 
@@ -57,8 +58,8 @@ class _ShowState extends State<Show> {
       "request": posttext,
       "report": report,
       "check": check,
-      "donarimage": globalimage,
-      "donarname": globalname,
+      "donarimage": globalimage1,
+      "donarname": globalname1,
       "uid": widget.uid
     });
 
@@ -121,7 +122,17 @@ class _ShowState extends State<Show> {
                   child: Text("Accepted"),
                   onPressed: () {
                     add(widget.post, widget.image, widget.name, widget.report,
-                        "true");
+                            "true")
+                        .then((value) {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => Chat2(
+                                    image: widget.image,
+                                    name: widget.name,
+                                    uid: widget.uid,
+                                  )));
+                    });
                   }),
             )
           ],

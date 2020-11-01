@@ -219,7 +219,7 @@ class _SignInState extends State<SignIn> {
                                   formkey.currentState.save();
                                   signIn(_email.text, _pwd.text).then((user) {
                                     if (user != null) {
-                                      Navigator.pushReplacement(
+                                      Navigator.push(
                                           context,
                                           MaterialPageRoute(
                                               builder: (context) => Bottom()));

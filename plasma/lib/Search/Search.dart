@@ -1,6 +1,7 @@
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
+import 'package:plasma/Search/chat3.dart';
 import 'package:plasma/global.dart';
 
 int _value = 0;
@@ -241,45 +242,62 @@ class _SearchState extends State<Search> {
                               return snapshot1.hasData
                                   ? Padding(
                                       padding: const EdgeInsets.all(8.0),
-                                      child: Container(
-                                        decoration: BoxDecoration(
-                                            color: Colors.blue[900],
-                                            borderRadius: BorderRadius.all(
-                                                Radius.circular(15))),
+                                      child: GestureDetector(
+                                        onTap: () {
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) => Chat3(
+                                                        image: snapshot1.data
+                                                            .value['image'],
+                                                        name: snapshot1.data
+                                                            .value['fullname'],
+                                                        uid: snapshot1
+                                                            .data.value['uid'],
+                                                      )));
+                                        },
                                         child: Container(
                                           decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(20)),
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(10.0),
-                                            child: Column(
-                                              children: [
-                                                Padding(
-                                                  padding:
-                                                      const EdgeInsets.all(8.0),
-                                                  child: CircleAvatar(
-                                                    radius: 30,
-                                                    backgroundColor:
-                                                        Colors.transparent,
-                                                    backgroundImage:
-                                                        NetworkImage(snapshot1
-                                                            .data
-                                                            .value['image']),
+                                              color: Colors.blue[900],
+                                              borderRadius: BorderRadius.all(
+                                                  Radius.circular(15))),
+                                          child: Container(
+                                            decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(20)),
+                                            child: Padding(
+                                              padding:
+                                                  const EdgeInsets.all(10.0),
+                                              child: Column(
+                                                children: [
+                                                  Padding(
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            8.0),
+                                                    child: CircleAvatar(
+                                                      radius: 30,
+                                                      backgroundColor:
+                                                          Colors.transparent,
+                                                      backgroundImage:
+                                                          NetworkImage(snapshot1
+                                                              .data
+                                                              .value['image']),
+                                                    ),
                                                   ),
-                                                ),
-                                                SizedBox(
-                                                  width: 30,
-                                                ),
-                                                Text(
-                                                  snapshot1
-                                                      .data.value['fullname'],
-                                                  style: TextStyle(
-                                                      fontSize: 25,
-                                                      color: Colors.white,
-                                                      fontWeight:
-                                                          FontWeight.bold),
-                                                )
-                                              ],
+                                                  SizedBox(
+                                                    width: 30,
+                                                  ),
+                                                  Text(
+                                                    snapshot1
+                                                        .data.value['fullname'],
+                                                    style: TextStyle(
+                                                        fontSize: 25,
+                                                        color: Colors.white,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  )
+                                                ],
+                                              ),
                                             ),
                                           ),
                                         ),

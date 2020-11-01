@@ -2,6 +2,7 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:plasma/Screen/donate.dart';
+import 'package:plasma/Screen/faq.dart';
 import 'package:plasma/Screen/feed.dart';
 import 'package:plasma/Screen/profile.dart';
 import 'package:plasma/Search/Search.dart';
@@ -69,7 +70,7 @@ class _BottomState extends State<Bottom> {
       Feed(),
       Search(),
       Donate(),
-      Profile(),
+      FAQ(),
       Profile(),
     ];
 

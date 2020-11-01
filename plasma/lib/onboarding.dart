@@ -30,7 +30,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
 
   void _onIntroEnd(context) {
     Navigator.of(context).push(
-      MaterialPageRoute(builder: (_) => Choices()),
+      MaterialPageRoute(builder: (_) => One1()),
     );
   }
 

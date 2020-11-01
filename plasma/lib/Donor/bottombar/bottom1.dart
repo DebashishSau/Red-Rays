@@ -26,7 +26,7 @@ class _BottomState extends State<Bottom1> {
     FirebaseDatabase.instance
         .reference()
         .child("Donator")
-        .child(uid1)
+        .child(uid2)
         .once()
         .then((DataSnapshot snapshot) {
       Map<dynamic, dynamic> values;
@@ -37,7 +37,7 @@ class _BottomState extends State<Bottom1> {
         FirebaseDatabase.instance
             .reference()
             .child("Donator")
-            .child(uid1)
+            .child(uid2)
             .child("fullname")
             .once()
             .then((DataSnapshot s) {
@@ -49,7 +49,7 @@ class _BottomState extends State<Bottom1> {
         FirebaseDatabase.instance
             .reference()
             .child("Donator")
-            .child(uid1)
+            .child(uid2)
             .child("image")
             .once()
             .then((DataSnapshot s) {

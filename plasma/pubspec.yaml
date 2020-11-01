@@ -19,9 +19,11 @@ version: 1.0.0+1
 
 environment:
   sdk: ">=2.7.0 <3.0.0"
-
+  
 dependencies:
   flutter:
+    sdk: flutter
+  flutter_localizations:
     sdk: flutter
 
 
@@ -78,7 +80,8 @@ flutter:
      - images/copy8.png
      - images/copy55.png
      - images/pink-288804-5fbc02059449.json
-
+     - lib/Language/types/en.json
+     - lib/Language/types/hi.json
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
 

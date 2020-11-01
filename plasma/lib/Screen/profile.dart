@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:plasma/global.dart';
 
 class Profile extends StatefulWidget {
   @override
@@ -48,13 +49,13 @@ class _FeedState extends State<Profile> {
               width: 300,
               decoration: BoxDecoration(
                   image: DecorationImage(
-                      image: AssetImage("images/pp.jpg"), fit: BoxFit.cover)),
+                      image: NetworkImage(globalimage), fit: BoxFit.cover)),
             ),
             SizedBox(
               height: 20,
             ),
             Text(
-              "USERNAME",
+              globalname,
               style: TextStyle(fontWeight: FontWeight.w700, fontSize: 20),
             ),
             SizedBox(

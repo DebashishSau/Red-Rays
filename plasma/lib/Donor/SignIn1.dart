@@ -33,7 +33,7 @@ class _SignInState extends State<SignIn1> {
       final FirebaseUser currentUser = await auth.currentUser();
       assert(user.user.uid == currentUser.uid);
       uid2 = user.user.uid;
-      print(uid1);
+      print(uid2);
       return user;
     } catch (e) {
       print(e);
