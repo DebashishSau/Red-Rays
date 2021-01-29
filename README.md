@@ -23,7 +23,7 @@ RedRays app has the following features:<br>
 ## How we built it:iphone:
 Cross -platform application built using Firebase, Flutter, MLkit and Agora SDK 
 
-## 📋 What's next for ADIRA?
+## 📋 What's next for Red-Rays?
 •	Collaborating with Blood/Plasma Banks<br>
 •	Upgrading Security to SHA-512 data-security protocols<br>
 •	Implementing Blockchain for medical information storage<br> 
