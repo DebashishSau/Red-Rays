@@ -1,4 +1,4 @@
-# LoopCode-RedRays :syringe:
+# RedRays :syringe:
 <p align="center">
   <a href="#" style=" -webkit-user-select: none;-ms-user-select: none;user-select: none;">
     <img src="https://github.com/Shanu1515/beta08_LoopCode/blob/main/plasma/images/logo.png" alt="Logo" width="150" height="150">
@@ -38,7 +38,7 @@ Cross -platform application built using Firebase, Flutter, MLkit and Agora SDK
 Download or clone this repo by using the link below:
 
 ```
-https://github.com/Shanu1515/beta08_LoopCode.git
+https://github.com/Shanu1515/Red-Rays.git
 ```
 
 **Step 2:**
